@@ -1,44 +1,21 @@
-import Loading1 from "./svg/loading1";
-import Loading2 from "./svg/loading2";
-import Loading3 from "./svg/loading3";
-import Loading4 from "./svg/loading4";
-import Loading5 from "./svg/loading5";
-import Loading6 from "./svg/loading6";
-import Loading7 from "./svg/loading8";
-import Loading8 from "./svg/loading7";
+import Loading from "@buzuosheng/loading";
 import "./loading.css";
 
-const Loading = () => {
+const LdComponent = () => {
   return (
     <div>
       <div className="header">
         <h1>8种loading样式</h1>
       </div>
       <div className="loading-wrap">
-        <div className="loading">
-          <Loading1 />
-        </div>
-        <div className="loading">
-          <Loading2 />
-        </div>
-        <div className="loading">
-          <Loading3 />
-        </div>
-        <div className="loading">
-          <Loading4 />
-        </div>
-        <div className="loading">
-          <Loading5 />
-        </div>
-        <div className="loading">
-          <Loading6 />
-        </div>
-        <div className="loading">
-          <Loading7 />
-        </div>
-        <div className="loading">
-          <Loading8 />
-        </div>
+        <Loading className="loading" type={1} />
+        <Loading className="loading" type={2} />
+        <Loading className="loading" type={3} />
+        <Loading className="loading" type={4} />
+        <Loading className="loading" type={5} />
+        <Loading className="loading" type={6} />
+        <Loading className="loading" type={7} />
+        <Loading className="loading" type={8} />
       </div>
       <div className="footer">
         <a href="https://github.com/buzuosheng/my-react-loading-demo">源码</a>
@@ -47,4 +24,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default LdComponent;
