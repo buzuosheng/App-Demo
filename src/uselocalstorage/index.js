@@ -4,8 +4,7 @@ import './index.css'
 import Helmet from "react-helmet";
 
 const UseLocalStorage = () => {
-  const [item, setItem] = useLocal('name', '', { prefix: 'thistest', age: '1m' })
-  // console.log(typeof (ms('1d')));
+  const [item, setItem] = useLocal('name')
   return (
     < div className="use-localstorage" >
       <Helmet>

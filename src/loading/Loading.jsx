@@ -1,4 +1,4 @@
-import Loading from "@buzuosheng/loading";
+import { Loading } from "@buzuosheng/loading";
 import "./loading.css";
 import Helmet from "react-helmet";
 
@@ -12,14 +12,14 @@ const LdComponent = () => {
         <h1>8种loading样式</h1>
       </div>
       <div className="loading-wrap">
-        <Loading className="loading" type={1} />
-        <Loading className="loading" type={2} />
-        <Loading className="loading" type={3} />
-        <Loading className="loading" type={4} />
-        <Loading className="loading" type={5} />
-        <Loading className="loading" type={6} />
-        <Loading className="loading" type={7} />
-        <Loading className="loading" type={8} />
+        <Loading type={"Oval"} />
+        <Loading type={"LittleCircle"} />
+        <Loading type={"HalfCircle"} />
+        <Loading type={"Audio"} />
+        <Loading type={"Rain"} />
+        <Loading type={"Stretch"} />
+        <Loading type={"Flicker"} />
+        <Loading type={"StretchFlicker"} />
       </div>
       <div className="footer">
         <a href="https://github.com/buzuosheng/my-react-loading">源码</a>
