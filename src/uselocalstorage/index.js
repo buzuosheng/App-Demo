@@ -1,10 +1,10 @@
 import React from 'react'
-import useLocal from '@buzuosheng/use-localstorage'
+import { useLocalStorage } from '@buzuosheng/use-localstorage'
 import './index.css'
 import Helmet from "react-helmet";
 
 const UseLocalStorage = () => {
-  const [item, setItem] = useLocal('name', { age: '1000' })
+  const [item, setItem] = useLocalStorage('name', { age: '1000' })
   return (
     < div className="use-localstorage" >
       <Helmet>

@@ -12,7 +12,7 @@ const LdComponent = () => {
         <h1>8种loading样式</h1>
       </div>
       <div className="loading-wrap">
-        <Loading type={"Oval"} />
+        <Loading type="Oval" color="#1890ff" hegiht={40} width={40} />
         <Loading type={"LittleCircle"} />
         <Loading type={"HalfCircle"} />
         <Loading type={"Audio"} />
