@@ -1,5 +1,6 @@
 import React from 'react'
-import { useLocalStorage } from '@buzuosheng/use-localstorage'
+// import { useLocalStorage } from '@buzuosheng/use-localstorage'
+import { useLocalStorage } from '../hooks/uselocalStorage/use-localstorage'
 import Helmet from "react-helmet";
 
 const UseLocalStorage = () => {
@@ -19,7 +20,7 @@ const UseLocalStorage = () => {
         <input
           className="ml-4 py-1 px-2 outline-none border rounded-lg"
           placeholder="Enter your name"
-          value={item}
+          value={item || ''}
           onChange={e => setItem(e.target.value)}
         />
       </div>
@@ -27,6 +28,7 @@ const UseLocalStorage = () => {
         <span>set the value to an object</span>
         <button className="w-20 border rounded-lg focus:outline-none bg-green-200 text-white ml-4 p-1" onClick={() => setItem({})}>Click</button>
       </div>
+      <p className="mt-4 text-center text-2xl">see values via <span className="text-green-400">devtool {'->'} application {'->'} local Storage</span></p>
     </ div>
   )
 }
