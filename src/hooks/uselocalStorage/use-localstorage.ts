@@ -1,13 +1,11 @@
-import { Dispatch, useEffect, useState } from 'react';
-import ms from 'ms';
-import useMemoFn from './useMemoFn';
-import { useUpdateEffect } from './useUpdateEffect';
-import isBrowser from './isBrowser';
+import { Dispatch, useEffect, useState } from 'react'
+import ms from 'ms'
+import isBrowser from './isBrowser'
 
 interface Options<T> {
-  age: string;
-  initialValue: T;
-  prefix: string;
+  age: string
+  initialValue: T
+  prefix: string
 }
 
 export function useLocalStorage<T>(
@@ -18,63 +16,51 @@ export function useLocalStorage<T>(
     age: '7d',
     initialValue: undefined,
     prefix: 'Prefix:',
-    ..._options,
-  };
-  const prefixKey = options.prefix + key;
-  let storage: Storage | undefined;
+    ..._options
+  }
+  const prefixKey = options.prefix + key
+  let storage: Storage | undefined
 
   try {
-    storage = isBrowser ? localStorage : undefined;
+    storage = isBrowser ? localStorage : undefined
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 
-  function getStorageValue() {
-    try {
-      const storageValue = storage?.getItem(prefixKey);
-      if (!storageValue) return;
-      const isExpire = Date.now() > JSON.parse(storageValue).expireAt;
-      if (isExpire) {
-        storage?.removeItem(prefixKey);
-        return;
-      }
-      return JSON.parse(storageValue);
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  const [value, setValue] = useState<T | undefined>(() => getStorageValue() || options.initialValue);
-
-  useUpdateEffect(() => getStorageValue(), [prefixKey]);
+  const storageValue = storage?.getItem(prefixKey)
+  const item = JSON.parse(storageValue || '{}')
+  const [value, setValue] = useState<T | undefined>(
+    item.value || options.initialValue
+  )
 
   const UpdateValue = (newValue: T) => {
-    setValue(newValue);
+    setValue(newValue)
     const data = {
       value: newValue,
-      expireAt: Date.now() + ms(options.age),
-    };
-    try {
-      storage?.setItem(prefixKey, JSON.stringify(data));
-    } catch (err) {
-      console.error(err);
+      expireAt: Date.now() + ms(options.age)
     }
-  };
+    try {
+      storage?.setItem(prefixKey, JSON.stringify(data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   useEffect(() => {
-    const storageValue = localStorage.getItem(prefixKey);
+    const storageValue = storage?.getItem(prefixKey)
     if (!storageValue) {
-      return;
+      return
     }
-    const isExpire = Date.now() > JSON.parse(storageValue).expireAt;
+    const isExpire = Date.now() > JSON.parse(storageValue).expireAt
     if (isExpire) {
-      window.localStorage.removeItem(prefixKey);
+      storage?.removeItem(prefixKey)
+      setValue(undefined)
     }
-    const newValue = JSON.parse(storageValue).value;
+    const newValue = JSON.parse(storageValue).value
     if (JSON.stringify(value) !== JSON.stringify(newValue)) {
-      setValue(newValue);
+      setValue(newValue)
     }
-  });
+  })
 
-  return [value, useMemoFn(UpdateValue)];
+  return [value, UpdateValue]
 }
